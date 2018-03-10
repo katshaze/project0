@@ -1,0 +1,52 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #abd5cc;
+}
+
+.container {
+  width: 900px;
+  margin: 0 auto;
+}
+
+.board {
+  width: 600px;
+  height: 600px;
+  margin: 22px auto 12px auto;
+  position: relative;
+}
+
+.square {
+  width: 32%;
+  height: 32%;
+  border-color: black;
+  border-width: 2px;
+  display: inline-block;
+}
+
+.top {
+  border-bottom-style: solid;
+}
+
+.centre {
+  border-left-style: solid;
+  border-right-style: solid;
+}
+
+.bottom {
+  border-top-style: solid;
+}
+
+.reset {
+  margin: 0 400px;
+}
+
+button {
+  font-size: 20px;
+  padding: 5px 15px;
+  background-color: inherit;
+  border: solid 1px black;
+  border-radius: 10%;
+}
