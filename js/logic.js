@@ -1,95 +1,111 @@
-const boardStatus = {
-  "1": "empty",
-  2: "empty",
-  3: "empty",
-  4: "empty",
-  5: "empty",
-  6: "empty",
-  7: "empty",
-  8: "empty",
-  9: "empty"
-}
+const game = {
+  boardStatus: {
+    1: "empty",
+    2: "empty",
+    3: "empty",
+    4: "empty",
+    5: "empty",
+    6: "empty",
+    7: "empty",
+    8: "empty",
+    9: "empty"
+  },
 
-let xTurnsPlayed = 0;
-let toadTurnsPlayed = 0;
-let winningCombo = {
-  "X": false,
-  "Toad": false,
-  "Draw": false
-}
+  xTurnsPlayed: 0,
 
-const checkForWin = function(player) {
-  if (boardStatus[1] === player && boardStatus[2] === player && boardStatus[3] === player) {
-    //console.log(`this is working - x wins`);
-    winningCombo[player] = true;
-  }
-  if (boardStatus[1] === player && boardStatus[5] === player && boardStatus[9] === player) {
-    winningCombo[player] = true;
-  }
-  if (boardStatus[1] === player && boardStatus[4] === player && boardStatus[7] === player) {
-    winningCombo[player] = true;
-  }
-  if (boardStatus[2] === player && boardStatus[5] === player && boardStatus[8] === player) {
-    winningCombo[player] = true;
-  }
-  if (boardStatus[3] === player && boardStatus[6] === player && boardStatus[9] === player) {
-    winningCombo[player] = true;
-  }
-  if (boardStatus[3] === player && boardStatus[5] === player && boardStatus[7] === player) {
-    winningCombo[player] = true;
-  }
-  if (boardStatus[4] === player && boardStatus[5] === player && boardStatus[6] === player) {
-    winningCombo[player] = true;
-  }
-  if (boardStatus[7] === player && boardStatus[8] === player && boardStatus[9] === player) {
-    winningCombo[player] = true;
-  }
-}
+  toadTurnsPlayed: 0,
 
-const checkForDraw = function() {
-  if (xTurnsPlayed + toadTurnsPlayed === 9) {
-    if (winningCombo["X"] === false && winningCombo["Toad"] === false) {
-      winningCombo["Draw"] = true;
+  winningCombo: {
+    "X": false,
+    "Toad": false,
+    "Draw": false
+  },
+
+  checkForWin: function(player) {
+    if (this.boardStatus[1] === player && this.boardStatus[2] === player && this.boardStatus[3] === player) {
+      //console.log(`this is working - x wins`);
+      this.winningCombo[player] = true;
+    }
+    if (this.boardStatus[1] === player && this.boardStatus[5] === player && this.boardStatus[9] === player) {
+      this.winningCombo[player] = true;
+    }
+    if (this.boardStatus[1] === player && this.boardStatus[4] === player && this.boardStatus[7] === player) {
+      this.winningCombo[player] = true;
+    }
+    if (this.boardStatus[2] === player && this.boardStatus[5] === player && this.boardStatus[8] === player) {
+      this.winningCombo[player] = true;
+    }
+    if (this.boardStatus[3] === player && this.boardStatus[6] === player && this.boardStatus[9] === player) {
+      this.winningCombo[player] = true;
+    }
+    if (this.boardStatus[3] === player && this.boardStatus[5] === player && this.boardStatus[7] === player) {
+      this.winningCombo[player] = true;
+    }
+    if (this.boardStatus[4] === player && this.boardStatus[5] === player && this.boardStatus[6] === player) {
+      this.winningCombo[player] = true;
+    }
+    if (this.boardStatus[7] === player && this.boardStatus[8] === player && this.boardStatus[9] === player) {
+      this.winningCombo[player] = true;
+    }
+  },
+
+  checkForDraw: function() {
+    if (this.xTurnsPlayed + this.toadTurnsPlayed === 9) {
+      if (this.winningCombo["X"] === false && this.winningCombo["Toad"] === false) {
+        this.winningCombo["Draw"] = true;
+      }
+    }
+  },
+
+  xPlays: function(square) {
+    if (this.boardStatus[square] === "empty") {
+      //console.log(`${square} is empty - free to play`);
+      this.boardStatus[square] = "X";
+      //console.log(boardStatus[square]);
+      this.xTurnsPlayed += 1;
+      //console.log(xTurnsPlayed);
+    }
+    if (this.xTurnsPlayed >= 3) {
+      this.checkForWin("X");
+    }
+    if (this.winningCombo["X"] === true) {
+      console.log(`X WINS.`);
+    }
+    this.checkForDraw();
+    if (this.winningCombo["Draw"] === true) {
+      console.log('GAME ENDS IN A DRAW.');
+    }
+  },
+
+  toadPlays: function(square) {
+    if (this.boardStatus[square] === "empty") {
+      this.boardStatus[square] = "Toad";
+      this.toadTurnsPlayed += 1;
+    }
+    if (this.toadTurnsPlayed >= 3) {
+      this.checkForWin("Toad");
+    }
+    if (this.winningCombo["Toad"] === true) {
+      console.log(`TOAD WINS.`);
+    }
+    this.checkForDraw();
+    if (this.winningCombo["Draw"] === true) {
+      console.log(`GAME ENDS IN A DRAW.`);
     }
   }
 }
 
-const xPlays = function(square) {
-  if (boardStatus[square] === "empty") {
-    //console.log(`${square} is empty - free to play`);
-    boardStatus[square] = "X";
-    //console.log(boardStatus[square]);
-    xTurnsPlayed += 1;
-    //console.log(xTurnsPlayed);
-  }
-  if (xTurnsPlayed >= 3) {
-    checkForWin("X");
-  }
-  if (winningCombo["X"] === true) {
-    console.log(`X WINS.`);
-  }
-  checkForDraw();
-  if (winningCombo["Draw"] === true) {
-    console.log('GAME ENDS IN A DRAW.');
-  }
-}
 
-const toadPlays = function(square) {
-  if (boardStatus[square] === "empty") {
-    boardStatus[square] = "Toad";
-    toadTurnsPlayed += 1;
-  }
-  if (toadTurnsPlayed >= 3) {
-    checkForWin("Toad");
-  }
-  if (winningCombo["Toad"] === true) {
-    console.log(`TOAD WINS.`);
-  }
-  checkForDraw();
-  if (winningCombo["Draw"] === true) {
-    console.log(`GAME ENDS IN A DRAW.`);
-  }
-}
+
+
+
+
+
+
+
+
+
+
 
 
 // const availableSquares = function() {
