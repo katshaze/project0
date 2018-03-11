@@ -1,3 +1,5 @@
+console.log("connected");
+
 const game = {
 
   boardStatus: {
@@ -69,7 +71,6 @@ const game = {
     }
     if (this.winningCombo[player] === true) {
       console.log(`${player} wins`);
-      return 
     }
     this.checkForDraw();
     if (this.winningCombo["Draw"] === true) {
