@@ -14,7 +14,7 @@ body {
 .board {
   width: 600px;
   height: 600px;
-  margin: 22px auto 12px auto;
+  margin: 22px auto 0 auto;
   position: relative;
 }
 
@@ -45,26 +45,9 @@ body {
   border-top-style: solid;
 }
 
-.reset {
-  margin: 0 400px;
-}
-
-button {
-  font-size: 20px;
-  padding: 5px 15px;
-  background-color: inherit;
-  border: solid 1px black;
-  border-radius: 10%;
-}
-
-button:hover {
-  cursor: pointer;
-}
-
-.x {
+.played {
   width: 100%;
   height: 100%;
-  visibility: hidden;
   top: 0;
   left: 0;
   position: absolute;
@@ -74,17 +57,72 @@ button:hover {
   font-family: 'Montserrat', sans-serif;
 }
 
+.x {
+  visibility: hidden;
+}
+
 .blowfish {
+  visibility: hidden;
+}
+
+.result {
+  margin: 20px auto 0 auto;
+  font-size: 24px;
+  height: 50px;
+}
+
+.message-container {
+  position:relative;
+  width: 50%;
+  height: 100%;
+  margin: 0 auto;
+}
+.x-wins {
+  visibility: hidden;
+  position: absolute;
   width: 100%;
   height: 100%;
-  visibility: hidden;
   top: 0;
   left: 0;
-  position: absolute;
-  font-size: 120px;
-  line-height: 200px;
   text-align: center;
-  font-family: sans-serif;
+
+}
+
+.blowfish-wins {
+  visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+
+.draw {
+  visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+
+.reset {
+  margin: 0 400px;
+  text-align: center;
+}
+
+button {
+  font-size: 20px;
+  padding: 4px 18px;
+  background-color: #e1f4e9;
+  border: solid 1px black;
+  border-radius: 10%;
+}
+
+button:hover {
+  cursor: pointer;
 }
 
 .visible {

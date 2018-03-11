@@ -84,20 +84,17 @@ $(document).ready(function() {
 
   $('.square').on('click', function() {
     console.log('square clicked'); // TODO: remove later
-    // Get the square name
-    const square = $(this).attr("id");
+    const square = $(this).attr("id"); //get the square name
     console.log(square); // TODO: remove later
     // run the play turn function using the particular square ID (1-9) and the player
     game.playTurn(square, player);
-    // TODO: Update the screen by writing the render function
     render();
-    //update playerTurn so that if player = "X", playerTurn now = "Blowfish" and if player = "Blowfish", playerTurn now = "X";
     if (player === "X") {
       player = "Blowfish";
     } else if (player === "Blowfish") {
       player = "X";
     };
-    console.log(player);
+    console.log(player); // TODO: remove later
   });
 
 });
