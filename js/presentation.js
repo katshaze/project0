@@ -24,6 +24,7 @@ const reset = function() {
   };
   game.endgame = false;
   $('.visible').removeClass('visible');
+  $('.makeBig').removeClass('makeBig')
   render();
 };
 
