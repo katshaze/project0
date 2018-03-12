@@ -59,7 +59,14 @@ $(document).ready(function() {
   console.log(player); // TODO: remove later
 
   $('.square').on('click', function() {
+    for (let key in game.winningCombo) {
+      if (game.winningCombo[key] === true) {
+        reset();
+      }
+    };
+
     console.log('square clicked'); // TODO: remove later
+    // TODO: If the board was just reset, don't want to run all this code until next click.
     const square = $(this).attr("id"); //get the square name
     console.log(square); // TODO: remove later
     // run the play turn function using the particular square ID (1-9) and the player
