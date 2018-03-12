@@ -25,6 +25,8 @@ const reset = function() {
     "Draw": false
   };
 
+  game.endgame = false;
+
   console.log(game.boardStatus); // TODO: remove later
   $('.visible').removeClass('visible');
   //$('.message-container div').toggleClass('invisible');
@@ -32,7 +34,7 @@ const reset = function() {
 };
 
 const render = function() {
-  // TODO: create this and make it work
+
   // if game.boardStatus["1"] = 'empty', do nothing, if 'X', add visible class to square 1 div x, if 'Blowfish', add visible class to square 1 div blowfish - do for all squares 1-9;
   for (let key in game.boardStatus) {
     if (game.boardStatus[key] === "X") {
@@ -51,14 +53,29 @@ const render = function() {
   };
 
   // TODO: Better mode: the three relevant X flash on screen by switching on a special class
-
 };
 
 $(document).ready(function() {
   //$('.message-container div').toggleClass('invisible');
   console.log(player); // TODO: remove later
 
-  $('.square').on('click', function() {
+  // switch on event listener for click to reset in endgame situation.
+  $('body').on('click', function() {
+    console.log('body clicked'); // TODO: remove later
+
+    if (game.endgame === true) {
+    console.log('endgame');
+    reset();
+    };
+  });
+
+  $('.square').on('click', function(event) {
+
+    if (game.endgame === true) {
+      return;
+    }
+
+    event.stopPropagation();
 
     console.log('square clicked'); // TODO: remove later
     // TODO: If the board was just reset, don't want to run all this code until next click.
@@ -73,13 +90,13 @@ $(document).ready(function() {
       player = "X";
     };
     console.log(player); // TODO: remove later
+
   });
 
   $('.reset').on('click', 'button', function() {
     console.log('reset button clicked'); // TODO: remove later
     reset();
-  })
-
+  });
 
 });
 

@@ -25,6 +25,8 @@ const game = {
     "Draw": false
   },
 
+  endgame: false,
+
   checkForWin: function(player) {
     if (this.boardStatus[1] === player && this.boardStatus[2] === player && this.boardStatus[3] === player) {
       //console.log(`this is working - x wins`);
@@ -62,6 +64,16 @@ const game = {
     }
   },
 
+  checkForEndgame: function() {
+    console.log('check for endgame function has been called');
+    for (let key in this.winningCombo) {
+      if (this.winningCombo[key] === true) {
+        this.endgame = true;
+        console.log(this.endgame); // TODO: remove later
+      }
+    }
+  },
+
   playTurn: function(square, player) {
     if (this.boardStatus[square] === "empty") {
       this.boardStatus[square] = player;
@@ -70,13 +82,7 @@ const game = {
     if (this.turnsPlayed[player] >= 3) {
       this.checkForWin(player);
     }
-    if (this.winningCombo[player] === true) {
-      console.log(`${player} wins`);
-    }
     this.checkForDraw();
-    if (this.winningCombo["Draw"] === true) {
-      console.log('GAME ENDS IN DRAW');
-    }
+    this.checkForEndgame();
   }
-
 }
