@@ -13,73 +13,49 @@ const reset = function() {
     8: "empty",
     9: "empty"
   };
+
+  game.turnsPlayed = {
+    "X": 0,
+    "Blowfish": 0
+  };
+
+  game.winningCombo = {
+    "X": false,
+    "Blowfish": false,
+    "Draw": false
+  };
+
+  console.log(game.boardStatus); // TODO: remove later
+  $('.visible').removeClass('visible');
+  //$('.message-container div').toggleClass('invisible');
+  render();
 };
 
 const render = function() {
   // TODO: create this and make it work
   // if game.boardStatus["1"] = 'empty', do nothing, if 'X', add visible class to square 1 div x, if 'Blowfish', add visible class to square 1 div blowfish - do for all squares 1-9;
-  if (game.boardStatus[1] === "X") {
-    $('#1 .x').addClass('visible');
-  };
-  if (game.boardStatus[1] === "Blowfish") {
-    $('#1 .blowfish').addClass('visible');
-  };
-  if (game.boardStatus[2] === "X") {
-    $('#2 .x').addClass('visible');
-  };
-  if (game.boardStatus[2] === "Blowfish") {
-    $('#2 .blowfish').addClass('visible');
-  };
-  if (game.boardStatus[3] === "X") {
-    $('#3 .x').addClass('visible');
-  };
-  if (game.boardStatus[3] === "Blowfish") {
-    $('#3 .blowfish').addClass('visible');
-  };
-  if (game.boardStatus[4] === "X") {
-    $('#4 .x').addClass('visible');
-  };
-  if (game.boardStatus[4] === "Blowfish") {
-    $('#4 .blowfish').addClass('visible');
-  };
-  if (game.boardStatus[5] === "X") {
-    $('#5 .x').addClass('visible');
-  };
-  if (game.boardStatus[5] === "Blowfish") {
-    $('#5 .blowfish').addClass('visible');
-  };
-  if (game.boardStatus[6] === "X") {
-    $('#6 .x').addClass('visible');
-  };
-  if (game.boardStatus[6] === "Blowfish") {
-    $('#6 .blowfish').addClass('visible');
-  };
-  if (game.boardStatus[7] === "X") {
-    $('#7 .x').addClass('visible');
-  };
-  if (game.boardStatus[7] === "Blowfish") {
-    $('#7 .blowfish').addClass('visible');
-  };
-  if (game.boardStatus[8] === "X") {
-    $('#8 .x').addClass('visible');
-  };
-  if (game.boardStatus[8] === "Blowfish") {
-    $('#8 .blowfish').addClass('visible');
-  };
-  if (game.boardStatus[9] === "X") {
-    $('#9 .x').addClass('visible');
-  };
-  if (game.boardStatus[9] === "Blowfish") {
-    $('#9 .blowfish').addClass('visible');
+  for (let key in game.boardStatus) {
+    if (game.boardStatus[key] === "X") {
+      $(`#${key} .x`).addClass('visible');
+    }
+    if (game.boardStatus[key] === "Blowfish") {
+      $(`#${key} .blowfish`).addClass('visible');
+    }
   };
 
-  // if winningCombo[X] is true, make the three relevant X flash on screen by switching on a special class;
-  // if winningCombo[blowfish] is true, make the three relevant blowfish flash on screen by switching on a special class;
-  // if winningCombo[draw] is true, make the borders of the squares flash on screen by switching on a special class;
+  // if winningCombo[X/Blowfish/Draw] is true, make text flashes at bottom saying X/Blowfish/Draw Wins (simple mode)
+  for (let key in game.winningCombo) {
+    if (game.winningCombo[key] === true) {
+      $(`.${key}-wins`).addClass('visible');
+    }
+  };
+
+  // TODO: Better mode: the three relevant X flash on screen by switching on a special class
 
 };
 
 $(document).ready(function() {
+  //$('.message-container div').toggleClass('invisible');
   console.log(player); // TODO: remove later
 
   $('.square').on('click', function() {
@@ -96,5 +72,11 @@ $(document).ready(function() {
     };
     console.log(player); // TODO: remove later
   });
+
+  $('.reset').on('click', 'button', function() {
+    console.log('reset button clicked'); // TODO: remove later
+    reset();
+  })
+
 
 });

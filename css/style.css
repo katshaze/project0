@@ -77,35 +77,35 @@ body {
   height: 100%;
   margin: 0 auto;
 }
-.x-wins {
-  visibility: hidden;
+
+.X-wins {
   position: absolute;
   width: 100%;
   height: 100%;
   top: 0;
   left: 0;
   text-align: center;
-
+  visibility: hidden;
 }
 
-.blowfish-wins {
-  visibility: hidden;
+.Blowfish-wins {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   text-align: center;
+  visibility: hidden;
 }
 
-.draw {
-  visibility: hidden;
+.Draw-wins {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   text-align: center;
+  visibility: hidden;
 }
 
 .reset {
@@ -128,6 +128,12 @@ button:hover {
 .visible {
   visibility: visible;
 }
+
+/*.invisible {
+  visibility: hidden;
+} */
+
+
 
 /*
 font-family: 'Montserrat', sans-serif;

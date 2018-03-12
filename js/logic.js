@@ -1,4 +1,4 @@
-console.log("connected");
+console.log("connected"); // TODO: remove later
 
 const game = {
 
@@ -53,8 +53,9 @@ const game = {
     }
   },
 
-  checkForDraw: function(player) {
-    if (this.turnsPlayed[player] + this.turnsPlayed[player] === 9) {
+  checkForDraw: function() {
+    console.log('the checkForDraw function got called');
+    if (this.turnsPlayed["X"] + this.turnsPlayed["Blowfish"] === 9) {
       if (this.winningCombo["X"] === false && this.winningCombo["Blowfish"] === false) {
         this.winningCombo["Draw"] = true;
       }
@@ -78,64 +79,4 @@ const game = {
     }
   }
 
-  // xPlays: function(square) {
-  //   if (this.boardStatus[square] === "empty") {
-  //     //console.log(`${square} is empty - free to play`);
-  //     this.boardStatus[square] = "X";
-  //     //console.log(boardStatus[square]);
-  //     this.xTurnsPlayed += 1;
-  //     //console.log(xTurnsPlayed);
-  //   }
-  //   if (this.xTurnsPlayed >= 3) {
-  //     this.checkForWin("X");
-  //   }
-  //   if (this.winningCombo["X"] === true) {
-  //     console.log(`X WINS.`);
-  //   }
-  //   this.checkForDraw();
-  //   if (this.winningCombo["Draw"] === true) {
-  //     console.log('GAME ENDS IN A DRAW.');
-  //   }
-  // },
-
-  // toadPlays: function(square) {
-  //   if (this.boardStatus[square] === "empty") {
-  //     this.boardStatus[square] = "Toad";
-  //     this.toadTurnsPlayed += 1;
-  //   }
-  //   if (this.toadTurnsPlayed >= 3) {
-  //     this.checkForWin("Toad");
-  //   }
-  //   if (this.winningCombo["Toad"] === true) {
-  //     console.log(`TOAD WINS.`);
-  //   }
-  //   this.checkForDraw();
-  //   if (this.winningCombo["Draw"] === true) {
-  //     console.log(`GAME ENDS IN A DRAW.`);
-  //   }
-  // }
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// const availableSquares = function() {
-// }
-//
-// const xFilled = [];
-// const toadFilled = [];
-// const winningCombos = [
-//   [1,2,3], [4,5,6], [7,8,9], [1,4,7], [2,5,8], [3,6,9], [1,5,9], [3,5,7]
-// ]
-// const squares = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
