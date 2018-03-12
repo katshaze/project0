@@ -1,7 +1,10 @@
-let player = "X";
+let player = game.players[game.startingPlayer()];
+console.log(`randomly generated player is ${player}`); // TODO: remove later
 
 const reset = function() {
-  player = "X";
+  player = game.players[game.startingPlayer()];
+  console.log(`randomly generated starting player on reset is ${player}`);
+
   game.boardStatus = {
     1: "empty",
     2: "empty",

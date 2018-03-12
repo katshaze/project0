@@ -4,37 +4,36 @@
 
 body {
   background-color: #d8f4e4;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Amatic SC', cursive;
   color: #13283d;
 }
 
 h1 {
   text-align: center;
   color: #13283d;
-  margin: 60px;
-  font-family: 'Amatic SC', cursive;
-  font-size: 70px;
+  margin: 20px;
+  font-size: 60px;
 }
 
 .container {
-  max-width: 900px;
-  margin: 50px auto 0  auto;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 .board {
-  max-width: 600px;
-  height: 600px;
+  max-width: 500px;
+  height: 500px;
   margin: 22px auto 0 auto;
   position: relative;
 }
 
 .square {
-  width: 32.8%;
-  height: 32.8%;
+  width: 32.7%;
+  height: 32.7%;
   border-color: black;
   border-width: 2px;
   display: inline-block;
-  position: absolute;
+  /*position: absolute;*/
   position: relative;
 }
 
@@ -62,9 +61,10 @@ h1 {
   left: 0;
   position: absolute;
   font-size: 120px;
-  line-height: 200px;
+  line-height: 163.5px;
   text-align: center;
   font-family: 'Montserrat', sans-serif;
+  color: #13283d;
 }
 
 .x {
@@ -78,21 +78,23 @@ h1 {
 }
 
 .makeBig {
-  transform: scale(2.2);
+  transform: scale(1.8);
 }
 
 .result {
-  margin: 20px auto 0 auto;
-  font-size: 24px;
-  height: 50px;
+  margin: 30px auto;
+  font-size: 42px;
+  height: 42px;
+  position: relative;
+  font-family: 'Amatic SC', cursive;
 }
 
-.message-container {
+/*.message-container {
   position:relative;
   width: 50%;
   height: 100%;
   margin: 0 auto;
-}
+}*/
 
 .X-wins {
   position: absolute;
@@ -124,17 +126,39 @@ h1 {
   visibility: hidden;
 }
 
+.tally-bar {
+  margin: 0 auto;
+}
+
+.tally-bar div {
+  width: 48%;
+  margin: 0 auto;
+  display: inline-block;
+  font-size: 32px;
+}
+
+.left-tally {
+  text-align: center;
+  padding-left: 100px;
+}
+
+.right-tally {
+  text-align: center;
+  padding-right: 100px;
+}
+
 .reset {
-  margin: 50px 400px 0 400px;
+  margin: 30px auto 0  auto;
   text-align: center;
 }
 
 button {
-  font-size: 20px;
+  font-size: 24px;
   padding: 4px 18px;
   background-color: #e1f4e9;
   border: solid 1px black;
   border-radius: 10%;
+  font-family: 'Amatic SC', cursive;
 }
 
 button:hover {

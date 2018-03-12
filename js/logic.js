@@ -2,6 +2,23 @@ console.log("connected"); // TODO: remove later
 
 const game = {
 
+  players: {
+    1: "X",
+    2: "Blowfish"
+  },
+
+  startingPlayer: function() {
+    let randomChoice = Math.floor(Math.random() * (3 - 1)) + 1;
+    return randomChoice;
+    //The maximum is exclusive and the minimum is inclusive
+  },
+
+  winsTally: {
+    "X": 0,
+    "Blowfish": 0,
+    "Draw": 0
+  }
+
   boardStatus: {
     1: "empty",
     2: "empty",
@@ -62,6 +79,7 @@ const game = {
     if (this.turnsPlayed["X"] + this.turnsPlayed["Blowfish"] === 9) {
       if (this.winningCombo["X"] === false && this.winningCombo["Blowfish"] === false) {
         this.winningCombo["Draw"] = true;
+        this.winsTally["Draw"] += 1;
       }
     }
   },
@@ -80,7 +98,7 @@ const game = {
       this.boardStatus[square] = player;
       this.turnsPlayed[player] += 1;
     }
-    if (this.turnsPlayed[player] >= 3) {
+    if (this.turnsPlayed[player] >= 3) { // TODO: decide if this is necessary or just do check for win everytime.
       this.checkForWin(player);
     }
     this.checkForDraw();
@@ -88,6 +106,7 @@ const game = {
     if (this.winningCombo[player] === true) {
       this.winningSquare = square;
       console.log(this.winningSquare); // TODO: remove later
+      this.winsTally[player] += 1;
     }
   }
 }
