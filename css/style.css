@@ -4,15 +4,13 @@
 
 body {
   background-color: #d8f4e4;
+  font-family: 'Montserrat', sans-serif;
 }
 
 h1 {
   text-align: center;
-  color: #3B755A;
-}
-
-h2 {
-  text-align: center;
+  color: #13283d;
+  margin: 60px;
 }
 
 .container {
@@ -72,6 +70,12 @@ h2 {
 
 .blowfish {
   visibility: hidden;
+  font-size: 120px;
+  transition: all 1.5s;
+}
+
+.makeBig {
+  transform: scale(2.2);
 }
 
 .result {

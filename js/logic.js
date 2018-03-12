@@ -27,6 +27,8 @@ const game = {
 
   endgame: false,
 
+  winningSquare: "",
+
   checkForWin: function(player) {
     if (this.boardStatus[1] === player && this.boardStatus[2] === player && this.boardStatus[3] === player) {
       //console.log(`this is working - x wins`);
@@ -56,7 +58,7 @@ const game = {
   },
 
   checkForDraw: function() {
-    console.log('the checkForDraw function got called');
+    console.log('the checkForDraw function got called'); // TODO: remove later
     if (this.turnsPlayed["X"] + this.turnsPlayed["Blowfish"] === 9) {
       if (this.winningCombo["X"] === false && this.winningCombo["Blowfish"] === false) {
         this.winningCombo["Draw"] = true;
@@ -69,7 +71,6 @@ const game = {
     for (let key in this.winningCombo) {
       if (this.winningCombo[key] === true) {
         this.endgame = true;
-        console.log(this.endgame); // TODO: remove later
       }
     }
   },
@@ -84,5 +85,9 @@ const game = {
     }
     this.checkForDraw();
     this.checkForEndgame();
+    if (this.winningCombo[player] === true) {
+      this.winningSquare = square;
+      console.log(this.winningSquare); // TODO: remove later
+    }
   }
 }
