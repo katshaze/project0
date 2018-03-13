@@ -1,3 +1,5 @@
+//branch: ai-feature-easy
+
 game.startingPlayer = "Blowfish";
 console.log(`starting player is ${game.startingPlayer}`); // TODO: remove later
 let player = "X";
