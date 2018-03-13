@@ -63,7 +63,7 @@ h1 {
   font-size: 120px;
   line-height: 163.5px;
   text-align: center;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Open Sans Condensed', sans-serif;
   color: #0c1825;
 }
 
@@ -160,4 +160,6 @@ button:hover {
 /*
 font-family: 'Montserrat', sans-serif;
 font-family: 'Raleway', sans-serif;
+font-family: 'Open Sans Condensed', sans-serif;
+font-family: 'PT Sans Narrow', sans-serif;
 */
