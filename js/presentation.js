@@ -1,5 +1,6 @@
-let player = game.players[game.startingPlayer()];
-console.log(`randomly generated player is ${player}`); // TODO: remove later
+game.startingPlayer = "Blowfish";
+console.log(`starting player is ${game.startingPlayer}`); // TODO: remove later
+let player = "X";
 
 const reset = function() {
 
@@ -24,17 +25,21 @@ const reset = function() {
     "Draw": false
   };
   game.endgame = false;
-  game.winsTally = {
-    "X": 0,
-    "Blowfish": 0
-  };
+
   $('.visible').removeClass('visible');
   $('.makeBig').removeClass('makeBig');
 
-  //randomly select and show starting player
-  player = game.players[game.startingPlayer()];
-  console.log(`randomly generated starting player on reset is ${player}`);
-  $(`.${player}-starts`).addClass('visible');
+  //switch starting player from what it was last time
+  if (game.startingPlayer === "X") {
+    console.log(`at time of reset, X was starting player`);
+    game.startingPlayer = "Blowfish";
+    console.log('new starting player on reset is blowfish');
+  } else if (game.startingPlayer === "Blowfish") {
+    console.log('at time of reset, blowfish was starting player');
+    game.startingPlayer = "X";
+    console.log('new starting player on reset is X');
+  }
+  $(`.${game.startingPlayer}-starts`).addClass('visible');
   render();
 };
 
@@ -77,15 +82,15 @@ const render = function() {
 };
 
 $(document).ready(function() {
-  console.log(player); // TODO: remove later
   reset();
+
 
   // event listener for click to reset in endgame situation.
   $('body').on('click', function() {
     console.log('body clicked'); // TODO: remove later
 
     if (game.endgame === true) {
-    console.log('endgame');
+    console.log('body event has run and endgame is true. about to reset.');
     reset();
     };
   });

@@ -7,11 +7,13 @@ const game = {
     2: "Blowfish"
   },
 
-  startingPlayer: function() {
-    let randomChoice = Math.floor(Math.random() * (3 - 1)) + 1;
-    return randomChoice;
-    //The maximum is exclusive and the minimum is inclusive
-  },
+  // startingPlayer: function() {
+  //   let randomChoice = Math.floor(Math.random() * (3 - 1)) + 1;
+  //   return randomChoice;
+  //   //The maximum is exclusive and the minimum is inclusive
+  // },
+
+  startingPlayer: "Blowfish",
 
   winsTally: {
     "X": 0,
