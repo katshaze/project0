@@ -1,27 +1,9 @@
-console.log("connected"); // TODO: remove later
 
 const game = {
 
-  players: {
-    1: "X",
-    2: "Blowfish"
-  },
-
-  // startingPlayer: function() {
-  //   let randomChoice = Math.floor(Math.random() * (3 - 1)) + 1;
-  //   return randomChoice;
-  //   //The maximum is exclusive and the minimum is inclusive
-  // },
-
   startingPlayer: "X",
 
-  player: "Blowfish",
-
-  winsTally: {
-    "X": 0,
-    "Blowfish": 0
-    //"Draw": 0 // TODO: Decide whether to bother with this.
-  },
+  currentPlayer: "X",
 
   boardStatus: {
     1: "empty",
@@ -50,9 +32,14 @@ const game = {
 
   winningSquare: "",
 
+  winsTally: {
+    "X": 0,
+    "Blowfish": 0
+    //"Draw": 0 // TODO: Decide whether to bother with this.
+  },
+
   checkForWin: function(player) {
     if (this.boardStatus[1] === player && this.boardStatus[2] === player && this.boardStatus[3] === player) {
-      //console.log(`this is working - x wins`);
       this.winningCombo[player] = true;
     }
     if (this.boardStatus[1] === player && this.boardStatus[5] === player && this.boardStatus[9] === player) {
@@ -79,7 +66,6 @@ const game = {
   },
 
   checkForDraw: function() {
-    console.log('the checkForDraw function got called'); // TODO: remove later
     if (this.turnsPlayed["X"] + this.turnsPlayed["Blowfish"] === 9) {
       if (this.winningCombo["X"] === false && this.winningCombo["Blowfish"] === false) {
         this.winningCombo["Draw"] = true;
@@ -89,11 +75,18 @@ const game = {
   },
 
   checkForEndgame: function() {
-    console.log('check for endgame function has been called');
     for (let key in this.winningCombo) {
       if (this.winningCombo[key] === true) {
         this.endgame = true;
       }
+    }
+  },
+
+  updateCurrentPlayer: function(player) {
+    if (player === "X") {
+      this.currentPlayer = "Blowfish";
+    } else {
+      this.currentPlayer = "X";
     }
   },
 
@@ -102,29 +95,26 @@ const game = {
       this.boardStatus[square] = player;
       this.turnsPlayed[player] += 1;
     }
-    if (this.turnsPlayed[player] >= 3) { // TODO: decide if this is necessary or just do check for win everytime.
-      this.checkForWin(player);
-    }
+    this.checkForWin(player);
     this.checkForDraw();
     this.checkForEndgame();
     if (this.winningCombo[player] === true) {
       this.winningSquare = square;
-      console.log(this.winningSquare); // TODO: remove later
+      console.log(`${this.winningSquare} is the blowfish's winning square.`); // TODO: remove later
       this.winsTally[player] += 1;
     }
+    this.updateCurrentPlayer(player);
   },
 
   playTurnAI: function() {
-    console.log(`AI function just got triggered.`);
     let availableSquares = [];
     for (key in this.boardStatus) {
       if (this.boardStatus[key] === "empty") {
         availableSquares.push(key);
       }
     }
-    console.log(`AI list of spots to choose from is ${availableSquares}`);
     let chosenSquare = availableSquares[Math.floor(Math.random() * availableSquares.length)];
-    console.log(`randomly chosen square is ${chosenSquare}`);
+    console.log(`AI's randomly chosen square is ${chosenSquare}, meaning AI play turn function is in progress`);
     this.boardStatus[chosenSquare] = "X";
     this.turnsPlayed["X"] += 1;
     this.checkForWin("X");
@@ -135,6 +125,7 @@ const game = {
       console.log(`${this.winningSquare} is the computer's winning square`); // TODO: remove later
       this.winsTally["X"] += 1;
     }
+    this.updateCurrentPlayer("X");
   }
 
 }
