@@ -1,3 +1,9 @@
+/* For testing purposes - remove later */
+div {
+  border: red solid 1px;
+}
+/* Above is for testing purposes - remove later */
+
 * {
   box-sizing: border-box;
 }
@@ -6,10 +12,6 @@ body {
   background-color: #d8f4e4;
   font-family: 'Amatic SC', cursive;
   color: #13283d;
-}
-
-div {
-  border: red solid 1px;
 }
 
 h1 {
@@ -32,8 +34,8 @@ h1 {
 }
 
 .square {
-  width: 32.7%;
-  height: 32.7%;
+  width: 32.9%;
+  height: 32.9%;
   border-color: black;
   border-width: 2px;
   display: inline-block;
@@ -118,7 +120,7 @@ h1 {
 }
 
 .tally-bar div {
-  width: 49%;
+  width: 49.9%;
   margin: 0 auto;
   display: inline-block;
   font-size: 32px;

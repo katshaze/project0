@@ -13,7 +13,9 @@ const game = {
   //   //The maximum is exclusive and the minimum is inclusive
   // },
 
-  startingPlayer: "Blowfish",
+  startingPlayer: "X",
+
+  player: "Blowfish",
 
   winsTally: {
     "X": 0,

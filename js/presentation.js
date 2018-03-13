@@ -1,8 +1,8 @@
 //branch: ai-feature-easy
 
-game.startingPlayer = "X";
-console.log(`starting player is ${game.startingPlayer}`); // TODO: remove later
-let player = "X";
+// game.startingPlayer = "X";
+// console.log(`starting player is ${game.startingPlayer}`); // TODO: remove later
+//let player = "X";
 
 const reset = function() {
 
@@ -40,10 +40,16 @@ const reset = function() {
     console.log('at time of reset, blowfish was starting player');
     game.startingPlayer = "X";
     console.log('new starting player on reset is X');
-    player = "X";
-    game.playTurnAI("X");
   }
+
   $(`.${game.startingPlayer}-starts`).addClass('visible');
+
+  if (game.startingPlayer === "X") {
+    game.player = "X";
+    game.playTurnAI("X");
+    console.log(`AI was triggered from inside reset function`);
+  }
+
   // render();
   // if (game.startingPlayer === "X") {
   //   player = "X";
@@ -55,18 +61,25 @@ const reset = function() {
 
 const render = function() {
 
+  // remove the msg re who starts the game if more than one move has been made by any player
+  for (let key in game.turnsPlayed) {
+    if (game.turnsPlayed[key] > 1) {
+      $(`.${key}-starts`).removeClass('visible');
+    }
+  };
+
   for (let key in game.boardStatus) {
     if (game.boardStatus[key] === "X") {
       $(`#${key} .x`).addClass('visible');
-      for (let key in game.winsTally) {
-        $(`.${key}-starts`).removeClass('visible');
-      }
+      // for (let key in game.winsTally) {
+        // $(`.${key}-starts`).removeClass('visible');
+      // }
     }
     if (game.boardStatus[key] === "Blowfish") {
       $(`#${key} .blowfish`).addClass('visible');
-      for (let key in game.winsTally) {
-        $(`.${key}-starts`).removeClass('visible');
-      }
+      // for (let key in game.winsTally) {
+        // $(`.${key}-starts`).removeClass('visible');
+      // }
     }
   };
 
@@ -90,16 +103,20 @@ const render = function() {
     $(`.${key}-tally`).html(`${game.winsTally[key]}`);
   };
 
-  if (player === "X") {
-    player = "Blowfish";
-  } else if (player === "Blowfish") {
-    player = "X";
-  };
+  // only change the current player if we're in the middle of a game, not at the start of a new game.
+  if (game.turnsPlayed["X"] + game.turnsPlayed["Blowfish"] > 0) {
+    if (game.player === "X") {
+      game.player = "Blowfish";
+    } else if (game.player === "Blowfish") {
+      game.player = "X";
+    };
+  }
 
   // check for if it's computer's turn, if it is, don't need to wait for next click but run computer's turn immediately, except in case of endgame situation.
   if (game.endgame != true) {
-    if (player === "X") {
-      game.playTurnAI("X");
+    if (game.player === "X") {
+      game.playTurnAI();
+      console.log(`AI just got triggered from inside render function`);
       render();
     }
   };
@@ -128,7 +145,7 @@ $(document).ready(function() {
     event.stopPropagation();
 
     const square = $(this).attr("id"); //get the square name
-    game.playTurn(square, player);
+    game.playTurn(square, game.player);
     render();
 
   });
