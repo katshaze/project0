@@ -40,8 +40,16 @@ const reset = function() {
     console.log('at time of reset, blowfish was starting player');
     game.startingPlayer = "X";
     console.log('new starting player on reset is X');
+    player = "X";
+    game.playTurnAI("X");
   }
   $(`.${game.startingPlayer}-starts`).addClass('visible');
+  // render();
+  // if (game.startingPlayer === "X") {
+  //   player = "X";
+  //   game.playTurnAI("X");
+  //   // render();
+  // }
   render();
 };
 
@@ -88,11 +96,13 @@ const render = function() {
     player = "X";
   };
 
-  // check for if it's computer's turn, if it is, don't need to wait for next click but run computer's turn immediately.
-  if (player === "X") {
-    game.playTurnAI("X");
-    render();
-  }
+  // check for if it's computer's turn, if it is, don't need to wait for next click but run computer's turn immediately, except in case of endgame situation.
+  if (game.endgame != true) {
+    if (player === "X") {
+      game.playTurnAI("X");
+      render();
+    }
+  };
 
 };
 

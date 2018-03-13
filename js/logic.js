@@ -124,13 +124,14 @@ const game = {
     let chosenSquare = availableSquares[Math.floor(Math.random() * availableSquares.length)];
     console.log(`randomly chosen square is ${chosenSquare}`);
     this.boardStatus[chosenSquare] = "X";
+    this.turnsPlayed["X"] += 1;
     this.checkForWin("X");
     this.checkForDraw();
     this.checkForEndgame();
     if (this.winningCombo["X"] === true) {
       this.winningSquare = chosenSquare;
       console.log(`${this.winningSquare} is the computer's winning square`); // TODO: remove later
-      this.winsTally[player] += 1;
+      this.winsTally["X"] += 1;
     }
   }
 
