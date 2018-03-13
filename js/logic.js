@@ -15,9 +15,9 @@ const game = {
 
   winsTally: {
     "X": 0,
-    "Blowfish": 0,
-    "Draw": 0
-  }
+    "Blowfish": 0
+    //"Draw": 0 // TODO: Decide whether to bother with this.
+  },
 
   boardStatus: {
     1: "empty",

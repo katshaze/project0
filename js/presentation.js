@@ -2,8 +2,6 @@ let player = game.players[game.startingPlayer()];
 console.log(`randomly generated player is ${player}`); // TODO: remove later
 
 const reset = function() {
-  player = game.players[game.startingPlayer()];
-  console.log(`randomly generated starting player on reset is ${player}`);
 
   game.boardStatus = {
     1: "empty",
@@ -26,8 +24,17 @@ const reset = function() {
     "Draw": false
   };
   game.endgame = false;
+  game.winsTally = {
+    "X": 0,
+    "Blowfish": 0
+  };
   $('.visible').removeClass('visible');
-  $('.makeBig').removeClass('makeBig')
+  $('.makeBig').removeClass('makeBig');
+
+  //randomly select and show starting player
+  player = game.players[game.startingPlayer()];
+  console.log(`randomly generated starting player on reset is ${player}`);
+  $(`.${player}-starts`).addClass('visible');
   render();
 };
 
@@ -36,9 +43,15 @@ const render = function() {
   for (let key in game.boardStatus) {
     if (game.boardStatus[key] === "X") {
       $(`#${key} .x`).addClass('visible');
+      for (let key in game.winsTally) {
+        $(`.${key}-starts`).removeClass('visible');
+      }
     }
     if (game.boardStatus[key] === "Blowfish") {
       $(`#${key} .blowfish`).addClass('visible');
+      for (let key in game.winsTally) {
+        $(`.${key}-starts`).removeClass('visible');
+      }
     }
   };
 
@@ -50,16 +63,22 @@ const render = function() {
   };
 
   // TODO: Better mode: the three relevant X flash on screen by switching on a special class
-  // TODO: Even better: the blowfish puffs up if it wins.
+
+  // The blowfish puffs up if it wins.
   if (game.winningCombo["Blowfish"] === true) {
     $(`#${game.winningSquare}
      .blowfish`).addClass('makeBig');
   };
 
+  // The win gets added to the relevant tally
+  for (let key in game.winsTally) {
+    $(`.${key}-tally`).html(`${game.winsTally[key]}`);
+  };
 };
 
 $(document).ready(function() {
   console.log(player); // TODO: remove later
+  reset();
 
   // event listener for click to reset in endgame situation.
   $('body').on('click', function() {
