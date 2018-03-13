@@ -1,6 +1,6 @@
 //branch: ai-feature-easy
 
-game.startingPlayer = "Blowfish";
+game.startingPlayer = "X";
 console.log(`starting player is ${game.startingPlayer}`); // TODO: remove later
 let player = "X";
 
@@ -81,11 +81,23 @@ const render = function() {
   for (let key in game.winsTally) {
     $(`.${key}-tally`).html(`${game.winsTally[key]}`);
   };
+
+  if (player === "X") {
+    player = "Blowfish";
+  } else if (player === "Blowfish") {
+    player = "X";
+  };
+
+  // check for if it's computer's turn, if it is, don't need to wait for next click but run computer's turn immediately.
+  if (player === "X") {
+    game.playTurnAI("X");
+    render();
+  }
+
 };
 
 $(document).ready(function() {
-  reset();
-
+  reset(); //this means on refresh, the starting player will be blowfish, so that the human can start first game.
 
   // event listener for click to reset in endgame situation.
   $('body').on('click', function() {
@@ -108,11 +120,7 @@ $(document).ready(function() {
     const square = $(this).attr("id"); //get the square name
     game.playTurn(square, player);
     render();
-    if (player === "X") {
-      player = "Blowfish";
-    } else if (player === "Blowfish") {
-      player = "X";
-    };
+
   });
 
   $('.reset').on('click', 'button', reset);

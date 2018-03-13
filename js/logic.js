@@ -110,5 +110,28 @@ const game = {
       console.log(this.winningSquare); // TODO: remove later
       this.winsTally[player] += 1;
     }
+  },
+
+  playTurnAI: function() {
+    console.log(`AI function just got triggered.`);
+    let availableSquares = [];
+    for (key in this.boardStatus) {
+      if (this.boardStatus[key] === "empty") {
+        availableSquares.push(key);
+      }
+    }
+    console.log(`AI list of spots to choose from is ${availableSquares}`);
+    let chosenSquare = availableSquares[Math.floor(Math.random() * availableSquares.length)];
+    console.log(`randomly chosen square is ${chosenSquare}`);
+    this.boardStatus[chosenSquare] = "X";
+    this.checkForWin("X");
+    this.checkForDraw();
+    this.checkForEndgame();
+    if (this.winningCombo["X"] === true) {
+      this.winningSquare = chosenSquare;
+      console.log(`${this.winningSquare} is the computer's winning square`); // TODO: remove later
+      this.winsTally[player] += 1;
+    }
   }
+
 }
