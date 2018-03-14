@@ -47,8 +47,10 @@ const newGameRender = function() {
   $(`.${game.startingPlayer}-starts`).addClass('visible');
   if (game.currentPlayer === "X") {
     console.log(`AI about to be triggered from inside newGameRender function`);
-    game.playTurn(game.chooseSquareAI(), game.currentPlayer);
-    render();
+    setTimeout(function() {
+      game.playTurn(game.chooseSquareAI(), game.currentPlayer);
+      render();
+    }, 300);
     console.log(`render function just got triggered after AI was triggered in situation of start of game, inside newGameRender function.`);
   };
 };
@@ -117,10 +119,10 @@ $(document).ready(function() {
     game.playTurn(square, game.currentPlayer);
     render();
     if (game.endgame != true) {
-      game.playTurn(game.chooseSquareAI(), game.currentPlayer);
-      console.log(`play turn function was called for AI`);
-      render();
-      console.log(`render was called after AI had its turn.`);
+      setTimeout(function() {
+        game.playTurn(game.chooseSquareAI(), game.currentPlayer);
+        render();
+      }, 500);
     }
   });
 
