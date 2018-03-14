@@ -1,7 +1,7 @@
 /* For testing purposes - remove later */
-div {
+/* div {
   border: red solid 1px;
-}
+} */
 /* Above is for testing purposes - remove later */
 
 * {
@@ -95,13 +95,6 @@ h1 {
   font-family: 'Amatic SC', cursive;
 }
 
-/*.message-container {
-  position:relative;
-  width: 50%;
-  height: 100%;
-  margin: 0 auto;
-}*/
-
 .result div {
   position: absolute;
   width: 100%;
@@ -115,24 +108,15 @@ h1 {
   visibility: hidden;
 }
 
-.tally-bar {
-  margin: 0 auto;
-}
-
-.tally-bar div {
-  width: 49.9%;
-  margin: 0 auto;
-  display: inline-block;
-  font-size: 32px;
+nav ul {
+  padding: 0;
   text-align: center;
 }
 
-.left-tally {
-  padding-left: 300px;
-}
-
-.right-tally {
-  padding-right: 300px;
+nav ul li {
+  display: inline-block;
+  padding: 0 100px;
+  font-size: 30px;
 }
 
 .reset {
