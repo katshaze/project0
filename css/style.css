@@ -1,3 +1,9 @@
+/* For testing purposes - remove later */
+div {
+  border: red solid 1px;
+}
+/* Above is for testing purposes - remove later */
+
 * {
   box-sizing: border-box;
 }
@@ -6,10 +12,6 @@ body {
   background-color: #d8f4e4;
   font-family: 'Amatic SC', cursive;
   color: #13283d;
-}
-
-div {
-  border: red solid 1px;
 }
 
 h1 {
@@ -27,17 +29,16 @@ h1 {
 .board {
   width: 500px;
   height: 500px;
-  margin: 22px auto 0 auto;
+  margin: 0 auto;
   position: relative;
 }
 
 .square {
-  width: 32.7%;
-  height: 32.7%;
+  width: 32.9%;
+  height: 32.9%;
   border-color: black;
   border-width: 2px;
   display: inline-block;
-  /*position: absolute;*/
   position: relative;
 }
 
@@ -93,13 +94,6 @@ h1 {
   font-family: 'Amatic SC', cursive;
 }
 
-/*.message-container {
-  position:relative;
-  width: 50%;
-  height: 100%;
-  margin: 0 auto;
-}*/
-
 .result div {
   position: absolute;
   width: 100%;
@@ -114,23 +108,18 @@ h1 {
 }
 
 .tally-bar {
-  margin: 0 auto;
+  background-color: #bbb;
 }
 
-.tally-bar div {
-  width: 49%;
-  margin: 0 auto;
-  display: inline-block;
-  font-size: 32px;
+.tally-bar ul {
+  padding: 0;
   text-align: center;
 }
 
-.left-tally {
-  padding-left: 300px;
-}
-
-.right-tally {
-  padding-right: 300px;
+.tally-bar ul li {
+  display: inline-block;
+  padding: 0 30px;
+  font-size: 30px;
 }
 
 .reset {

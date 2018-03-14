@@ -1,8 +1,24 @@
-game.startingPlayer = "Blowfish";
-console.log(`starting player is ${game.startingPlayer}`); // TODO: remove later
-let player = "X";
+// Simple two player version
+
+// game.startingPlayer = "Blowfish";
+// console.log(`starting player is ${game.startingPlayer}`); // TODO: remove later
+// let player = "X";
 
 const reset = function() {
+
+  //switch starting player from what it was last time
+  if (game.startingPlayer === "X") {
+    console.log(`at time of reset, X was starting player`);
+    game.startingPlayer = "Blowfish";
+    console.log('new starting player on reset is blowfish');
+  } else if (game.startingPlayer === "Blowfish") {
+    console.log('at time of reset, blowfish was starting player');
+    game.startingPlayer = "X";
+    console.log('new starting player on reset is X');
+  }
+
+  //double check currentplayer is set to whichever is the new starting player
+  game.currentPlayer = game.startingPlayer;
 
   game.boardStatus = {
     1: "empty",
@@ -26,48 +42,42 @@ const reset = function() {
   };
   game.endgame = false;
 
+  newGameRender();
+};
+
+const newGameRender = function() {
+
   $('.visible').removeClass('visible');
   $('.makeBig').removeClass('makeBig');
-
-  //switch starting player from what it was last time
-  if (game.startingPlayer === "X") {
-    console.log(`at time of reset, X was starting player`);
-    game.startingPlayer = "Blowfish";
-    console.log('new starting player on reset is blowfish');
-  } else if (game.startingPlayer === "Blowfish") {
-    console.log('at time of reset, blowfish was starting player');
-    game.startingPlayer = "X";
-    console.log('new starting player on reset is X');
-  }
   $(`.${game.startingPlayer}-starts`).addClass('visible');
-  render();
+
 };
 
 const render = function() {
 
-  for (let key in game.boardStatus) {
-    if (game.boardStatus[key] === "X") {
-      $(`#${key} .x`).addClass('visible');
-      for (let key in game.winsTally) {
-        $(`.${key}-starts`).removeClass('visible');
-      }
-    }
-    if (game.boardStatus[key] === "Blowfish") {
-      $(`#${key} .blowfish`).addClass('visible');
-      for (let key in game.winsTally) {
-        $(`.${key}-starts`).removeClass('visible');
-      }
+  // remove the msg re who starts the game if more than one move has been made by any player
+  for (let key in game.turnsPlayed) {
+    if (game.turnsPlayed[key] > 1) {
+      $(`.${key}-starts`).removeClass('visible');
     }
   };
 
-  // if winningCombo[X/Blowfish/Draw] is true, make text appear at bottom saying X/Blowfish/Draw Wins (simple mode)
+  // update the board squares with wherever X/Blowfish have played.
+  for (let key in game.boardStatus) {
+    if (game.boardStatus[key] === "X") {
+      $(`#${key} .x`).addClass('visible');
+    }
+    if (game.boardStatus[key] === "Blowfish") {
+      $(`#${key} .blowfish`).addClass('visible');
+    }
+  };
+
+  // if winningCombo[X/Blowfish/Draw] is true, make text appear at bottom saying X/Blowfish/Draw Wins (simple mode) // TODO: Better mode: the three relevant X flash on screen by switching on a special class
   for (let key in game.winningCombo) {
     if (game.winningCombo[key] === true) {
       $(`.${key}-wins`).addClass('visible');
     }
   };
-
-  // TODO: Better mode: the three relevant X flash on screen by switching on a special class
 
   // The blowfish puffs up if it wins.
   if (game.winningCombo["Blowfish"] === true) {
@@ -82,8 +92,7 @@ const render = function() {
 };
 
 $(document).ready(function() {
-  reset();
-
+  reset(); //this will mean that on refresh, the starting player will always be X.
 
   // event listener for click to reset in endgame situation.
   $('body').on('click', function() {
@@ -104,13 +113,13 @@ $(document).ready(function() {
     event.stopPropagation();
 
     const square = $(this).attr("id"); //get the square name
-    game.playTurn(square, player);
+    game.playTurn(square, game.currentPlayer);
     render();
-    if (player === "X") {
-      player = "Blowfish";
-    } else if (player === "Blowfish") {
-      player = "X";
-    };
+    // if (player === "X") {
+    //   player = "Blowfish";
+    // } else if (player === "Blowfish") {
+    //   player = "X";
+    // };
   });
 
   $('.reset').on('click', 'button', reset);
