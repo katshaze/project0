@@ -1,9 +1,5 @@
 // Simple two player version: code for interaction with browser
 
-// game.startingPlayer = "Blowfish";
-// console.log(`starting player is ${game.startingPlayer}`); // TODO: remove later
-// let player = "X";
-
 const reset = function() {
 
   //switch starting player from what it was last time
@@ -79,13 +75,13 @@ const render = function() {
     }
   };
 
-  // The blowfish puffs up if it wins.
+  // Puff up the blowfish if it wins.
   if (game.winningCombo["Blowfish"] === true) {
     $(`#${game.winningSquare}
      .blowfish`).addClass('makeBig');
   };
 
-  // The win gets added to the relevant tally
+  // Add the win to the relevant tally
   for (let key in game.winsTally) {
     $(`.${key}-tally`).html(`${game.winsTally[key]}`);
   };
@@ -115,11 +111,7 @@ $(document).ready(function() {
     const square = $(this).attr("id"); //get the square name
     game.playTurn(square, game.currentPlayer);
     render();
-    // if (player === "X") {
-    //   player = "Blowfish";
-    // } else if (player === "Blowfish") {
-    //   player = "X";
-    // };
+
   });
 
   $('.reset').on('click', 'button', reset);
