@@ -1,4 +1,4 @@
-// Simple two player version
+// Simple two player version: code for interaction with browser
 
 // game.startingPlayer = "Blowfish";
 // console.log(`starting player is ${game.startingPlayer}`); // TODO: remove later

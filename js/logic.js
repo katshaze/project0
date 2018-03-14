@@ -1,3 +1,5 @@
+// Simple two player version: code for state of play
+
 const game = {
 
   startingPlayer: "Blowfish",
