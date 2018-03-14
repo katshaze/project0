@@ -35,7 +35,6 @@ const game = {
   winsTally: {
     "X": 0,
     "Blowfish": 0
-    //"Draw": 0 // TODO: Decide whether to bother with this.
   },
 
   checkForWin: function(player) {
@@ -92,6 +91,7 @@ const game = {
 
   playTurn: function(square, player) {
     if (this.boardStatus[square] === "empty") {
+      console.log(`square ${square} is empty ready to be populated`);
       this.boardStatus[square] = player;
       this.turnsPlayed[player] += 1;
     }
@@ -100,13 +100,13 @@ const game = {
     this.checkForEndgame();
     if (this.winningCombo[player] === true) {
       this.winningSquare = square;
-      console.log(`${this.winningSquare} is the blowfish's winning square.`); // TODO: remove later
+      console.log(`${this.winningSquare} is ${player}'s winning square.`); // TODO: remove later
       this.winsTally[player] += 1;
     }
     this.updateCurrentPlayer(player);
   },
 
-  playTurnAI: function() {
+  chooseSquareAI: function() {
     let availableSquares = [];
     for (key in this.boardStatus) {
       if (this.boardStatus[key] === "empty") {
@@ -115,17 +115,7 @@ const game = {
     }
     let chosenSquare = availableSquares[Math.floor(Math.random() * availableSquares.length)];
     console.log(`AI's randomly chosen square is ${chosenSquare}, meaning AI play turn function is in progress`);
-    this.boardStatus[chosenSquare] = "X";
-    this.turnsPlayed["X"] += 1;
-    this.checkForWin("X");
-    this.checkForDraw();
-    this.checkForEndgame();
-    if (this.winningCombo["X"] === true) {
-      this.winningSquare = chosenSquare;
-      console.log(`${this.winningSquare} is the computer's winning square`); // TODO: remove later
-      this.winsTally["X"] += 1;
-    }
-    this.updateCurrentPlayer("X");
+    return chosenSquare;
   }
 
 }
