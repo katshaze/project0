@@ -1,4 +1,4 @@
-// Simple two player version: code for state of play
+// Two player version: code for state of play
 
 const game = {
 
@@ -38,6 +38,31 @@ const game = {
     "Blowfish": 0
   },
 
+  //MAIN FUNCTION, referring to other minor functions to update state of play
+  playTurn: function(square, player) {
+    //this code will only run if the square is empty.
+    if (this.boardStatus[square] === "empty") {
+      //update the board
+      this.boardStatus[square] = player;
+      //update the number of turns played
+      this.turnsPlayed[player] += 1;
+      //run the check for win function
+      this.checkForWin(player);
+      //run the check for draw function
+      this.checkForDraw();
+      //run the check for endgame function
+      this.checkForEndgame();
+      //if the player has won, note the winning square and update the wins tally
+      if (this.winningCombo[player] === true) {
+        this.winningSquare = square;
+        this.winsTally[player] += 1;
+      }
+      //update (alternate) current player
+      this.updateCurrentPlayer(player);
+    }
+  },
+
+  //check for win function, called from playTurn function every time someone has a turn 
   checkForWin: function(player) {
     if (this.boardStatus[1] === player && this.boardStatus[2] === player && this.boardStatus[3] === player) {
       this.winningCombo[player] = true;
@@ -88,22 +113,6 @@ const game = {
     } else {
       this.currentPlayer = "X";
     }
-  },
-
-  playTurn: function(square, player) {
-    if (this.boardStatus[square] === "empty") {
-      this.boardStatus[square] = player;
-      this.turnsPlayed[player] += 1;
-    }
-    this.checkForWin(player);
-    this.checkForDraw();
-    this.checkForEndgame();
-    if (this.winningCombo[player] === true) {
-      this.winningSquare = square;
-      console.log(`${this.winningSquare} is ${player}'s winning square.`); // TODO: remove later
-      this.winsTally[player] += 1;
-    }
-    this.updateCurrentPlayer(player);
   }
 
 }

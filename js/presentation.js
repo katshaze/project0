@@ -1,38 +1,39 @@
-// Simple two player version: code for interaction with browser
+// Two player version: code for interaction with browser
 
 $(document).ready(function() {
-  reset(); //this will mean that on refresh, the starting player will always be X.
+
+  reset(); //possibly not necessary since game object is set in the reset position by default, but ensures board is reset and starting player will always be the same (X).
 
   // event listener for click to reset in endgame situation.
   $('body').on('click', function() {
-    console.log('body clicked'); // TODO: remove later
 
     if (game.endgame === true) {
-    console.log('body event has run and endgame is true. about to reset.');
     reset();
     };
+
   });
 
+  //event listener for player clicking on any square on the board
   $('.square').on('click', function(event) {
     // if the last click caused an endgame, exit out of here instead of running the player's turn
     if (game.endgame === true) {
       return;
     }
-    // endgame is false if we get to here. if so, turn off the endgame event listener by using stop propogation for now since it's not an endgame situation.
+
+    // Endgame is false if we get to here. Therefore, turn off the endgame event listener for now by using stop propogation.
     event.stopPropagation();
 
     const square = $(this).attr("id"); //get the square name
-    game.playTurn(square, game.currentPlayer);
-    render();
-
+    game.playTurn(square, game.currentPlayer); //run the playTurn function
+    render(); //update the screen with the new state of play
   });
 
+  //event listener for the reset button being clicked.
   $('.reset').on('click', 'button', reset);
 
 });
 
 const reset = function() {
-
   //switch starting player from what it was last time
   if (game.startingPlayer === "X") {
     console.log(`at time of reset, X was starting player`);
@@ -72,6 +73,7 @@ const reset = function() {
   newGameRender();
 };
 
+//render for start of new game only - removes visible classes and notes the starting player
 const newGameRender = function() {
 
   $('.visible').removeClass('visible');
@@ -80,6 +82,7 @@ const newGameRender = function() {
 
 };
 
+//render function - called within event listener for when player clicks a square. takes current state of play from game object and updates all relevant elements afresh
 const render = function() {
 
   // remove the msg re who starts the game if more than one move has been made by any player
@@ -99,7 +102,7 @@ const render = function() {
     }
   };
 
-  // if winningCombo[X/Blowfish/Draw] is true, make text appear at bottom saying X/Blowfish/Draw Wins (simple mode) // TODO: Better mode: the three relevant X flash on screen by switching on a special class
+  // if winningCombo[X/Blowfish/Draw] is true, make text appear at bottom saying X/Blowfish/Draw Wins (simple mode)
   for (let key in game.winningCombo) {
     if (game.winningCombo[key] === true) {
       $(`.${key}-wins`).addClass('visible');
