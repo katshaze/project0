@@ -122,5 +122,4 @@ const game = {
       this.currentPlayer = "X";
     }
   }
-
-}
+};

@@ -6,21 +6,19 @@ $(document).ready(function() {
 
   // event listener for click to reset in endgame situation.
   $('body').on('click', function() {
-
     if (game.endgame === true) {
-    reset();
-    };
-
+      reset();
+    }
   });
 
-  //event listener for player clicking on any square on the board
+  //event listener for player clicking on any square on the board. passing in event parameter to be able to switch off propogation as needed within the function.
   $('.square').on('click', function(event) {
     // if the last click caused an endgame, exit out of here instead of running the player's turn
     if (game.endgame === true) {
       return;
     }
 
-    // Endgame is false if we get to here. Therefore, turn off the endgame event listener for now by using stop propogation.
+    //Endgame is false if we get to here so we keep going. //Event.stopPropagation() prevents the event from bubbling up the DOM tree, preventing any parent handlers from being notified of the event.
     event.stopPropagation();
 
     const square = $(this).attr("id"); //get the square name
@@ -30,19 +28,14 @@ $(document).ready(function() {
 
   //event listener for the reset button being clicked.
   $('.reset').on('click', 'button', reset);
-
 });
 
 const reset = function() {
   //switch starting player from what it was last time
   if (game.startingPlayer === "X") {
-    console.log(`at time of reset, X was starting player`);
     game.startingPlayer = "Blowfish";
-    console.log('new starting player on reset is blowfish');
   } else if (game.startingPlayer === "Blowfish") {
-    console.log('at time of reset, blowfish was starting player');
     game.startingPlayer = "X";
-    console.log('new starting player on reset is X');
   }
 
   //double check currentplayer is set to whichever is the new starting player
@@ -59,6 +52,7 @@ const reset = function() {
     8: "empty",
     9: "empty"
   };
+
   game.turnsPlayed = {
     "X": 0,
     "Blowfish": 0
@@ -75,11 +69,9 @@ const reset = function() {
 
 //render for start of new game only - removes visible classes and notes the starting player
 const newGameRender = function() {
-
   $('.visible').removeClass('visible');
   $('.makeBig').removeClass('makeBig');
   $(`.${game.startingPlayer}-starts`).addClass('visible');
-
 };
 
 //render function - called within event listener for when player clicks a square. takes current state of play from game object and updates all relevant elements afresh
@@ -90,7 +82,7 @@ const render = function() {
     if (game.turnsPlayed[key] > 1) {
       $(`.${key}-starts`).removeClass('visible');
     }
-  };
+  }
 
   // update the board squares with wherever X/Blowfish have played.
   for (let key in game.boardStatus) {
@@ -100,30 +92,30 @@ const render = function() {
     if (game.boardStatus[key] === "Blowfish") {
       $(`#${key} .blowfish`).addClass('visible');
     }
-  };
+  }
 
   // if winningCombo[X/Blowfish/Draw] is true, make text appear at bottom saying X/Blowfish/Draw Wins (simple mode)
   for (let key in game.winningCombo) {
     if (game.winningCombo[key] === true) {
       $(`.${key}-wins`).addClass('visible');
     }
-  };
+  }
 
   // Puff up the blowfish if it wins.
   if (game.winningCombo["Blowfish"] === true) {
     $(`#${game.winningSquare}
      .blowfish`).addClass('makeBig');
-  };
+  }
 
   // Flash the three relevant Xs if X wins.
   if (game.winningCombo["X"] === true) {
     $(`#${game.winningStrip[0]} .x`).addClass('animated flash');
     $(`#${game.winningStrip[1]} .x`).addClass('animated flash');
     $(`#${game.winningStrip[2]} .x`).addClass('animated flash');
-  };
+  }
 
   // Add the win to the relevant tally
   for (let key in game.winsTally) {
     $(`.${key}-tally`).html(`${game.winsTally[key]}`);
-  };
+  }
 };
