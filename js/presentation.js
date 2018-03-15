@@ -115,6 +115,13 @@ const render = function() {
      .blowfish`).addClass('makeBig');
   };
 
+  // Flash the three relevant Xs if X wins.
+  if (game.winningCombo["X"] === true) {
+    $(`#${game.winningStrip[0]} .x`).addClass('animated flash');
+    $(`#${game.winningStrip[1]} .x`).addClass('animated flash');
+    $(`#${game.winningStrip[2]} .x`).addClass('animated flash');
+  };
+
   // Add the win to the relevant tally
   for (let key in game.winsTally) {
     $(`.${key}-tally`).html(`${game.winsTally[key]}`);

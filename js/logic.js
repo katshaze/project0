@@ -62,31 +62,39 @@ const game = {
     }
   },
 
-  //check for win function, called from playTurn function every time someone has a turn 
+  //check for win function, called from playTurn function every time someone has a turn
   checkForWin: function(player) {
     if (this.boardStatus[1] === player && this.boardStatus[2] === player && this.boardStatus[3] === player) {
       this.winningCombo[player] = true;
+      this.winningStrip = [1,2,3];
     }
     if (this.boardStatus[1] === player && this.boardStatus[5] === player && this.boardStatus[9] === player) {
       this.winningCombo[player] = true;
+      this.winningStrip = [1,5,9];
     }
     if (this.boardStatus[1] === player && this.boardStatus[4] === player && this.boardStatus[7] === player) {
       this.winningCombo[player] = true;
+      this.winningStrip = [1,4,7];
     }
     if (this.boardStatus[2] === player && this.boardStatus[5] === player && this.boardStatus[8] === player) {
       this.winningCombo[player] = true;
+      this.winningStrip = [2,5,8];
     }
     if (this.boardStatus[3] === player && this.boardStatus[6] === player && this.boardStatus[9] === player) {
       this.winningCombo[player] = true;
+      this.winningStrip = [3,6,9];
     }
     if (this.boardStatus[3] === player && this.boardStatus[5] === player && this.boardStatus[7] === player) {
       this.winningCombo[player] = true;
+      this.winningStrip = [3,5,7];
     }
     if (this.boardStatus[4] === player && this.boardStatus[5] === player && this.boardStatus[6] === player) {
       this.winningCombo[player] = true;
+      this.winningStrip = [4,5,6];
     }
     if (this.boardStatus[7] === player && this.boardStatus[8] === player && this.boardStatus[9] === player) {
       this.winningCombo[player] = true;
+      this.winningStrip = [7,8,9];
     }
   },
 
