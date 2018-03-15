@@ -27,7 +27,7 @@ $(document).ready(function() {
   });
 
   //event listener for the reset button being clicked.
-  $('.reset').on('click', 'button', reset);
+  $('#reset').on('click', reset);
 });
 
 const reset = function() {
