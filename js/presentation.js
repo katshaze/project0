@@ -71,6 +71,7 @@ const reset = function() {
 const newGameRender = function() {
   $('.visible').removeClass('visible');
   $('.makeBig').removeClass('makeBig');
+  $('.flash').removeClass('animated flash');
   $(`.${game.startingPlayer}-starts`).addClass('visible');
 };
 
