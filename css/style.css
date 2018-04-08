@@ -69,6 +69,7 @@ main {
 
 .blowfish {
   font-size: 97px;
+
   transition: transform 1.5s;
 }
 
@@ -79,7 +80,7 @@ main {
 .result {
   margin: 20px auto;
   font-size: 42px;
-  height: 42px;
+  /* height: 42px; */
   position: relative;
   font-family: 'Amatic SC', cursive;
   font-weight: bold;
@@ -92,13 +93,14 @@ main {
   top: 0;
   left: 0;
   text-align: center;
+  color: #13283d;
 }
 
 .x, .blowfish, .X-wins, .Blowfish-wins, .Draw-wins, .Blowfish-starts, .X-starts {
   visibility: hidden;
 }
 
-aside {
+.tally {
   background-color: #bbb;
 }
 
@@ -112,6 +114,7 @@ li {
   padding: 0 15px;
   font-size: 30px;
   font-weight: bold;
+  margin-bottom: 5px;
 }
 
 button {
@@ -139,4 +142,8 @@ a {
 
 .visible {
   visibility: visible;
+}
+
+.transparent {
+  color: #d8f4e4;
 }
