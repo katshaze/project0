@@ -1,20 +1,18 @@
-'use strict';
-
 // Two player version: code for interaction with browser
 
-$(document).ready(function () {
+$(document).ready(function() {
 
   reset(); //possibly not necessary since game object is set in the reset position by default, but ensures board is reset and starting player will always be the same (X).
 
   // event listener for click to reset in endgame situation.
-  $('body').on('click', function () {
+  $('body').on('click', function() {
     if (game.endgame === true) {
       reset();
     }
   });
 
   //event listener for player clicking on any square on the board. passing in event parameter to be able to switch off propogation as needed within the function.
-  $('.square').on('click', function (event) {
+  $('.square').on('click', function(event) {
     // if the last click caused an endgame, exit out of here instead of running the player's turn
     if (game.endgame === true) {
       return;
@@ -23,7 +21,7 @@ $(document).ready(function () {
     //Endgame is false if we get to here so we keep going. //Event.stopPropagation() prevents the event from bubbling up the DOM tree, preventing any parent handlers from being notified of the event.
     event.stopPropagation();
 
-    var square = $(this).attr("id"); //get the square name
+    const square = $(this).attr("id"); //get the square name
     game.playTurn(square, game.currentPlayer); //run the playTurn function
     render(); //update the screen with the new state of play
   });
@@ -32,7 +30,7 @@ $(document).ready(function () {
   $('#reset').on('click', reset);
 });
 
-var reset = function reset() {
+const reset = function() {
   //switch starting player from what it was last time
   if (game.startingPlayer === "X") {
     game.startingPlayer = "Blowfish";
@@ -70,54 +68,55 @@ var reset = function reset() {
 };
 
 //render for start of new game only - removes visible classes and notes the starting player
-var newGameRender = function newGameRender() {
+const newGameRender = function() {
   $('.visible').removeClass('visible');
   $('.makeBig').removeClass('makeBig');
   $('.flash').removeClass('animated flash');
-  $('.' + game.startingPlayer + '-starts').addClass('visible');
+  $(`.${game.startingPlayer}-starts`).addClass('visible');
 };
 
 //render function - called within event listener for when player clicks a square. takes current state of play from game object and updates all relevant elements afresh
-var render = function render() {
+const render = function() {
 
   // remove the msg re who starts the game if more than one move has been made by any player
-  for (var key in game.turnsPlayed) {
+  for (let key in game.turnsPlayed) {
     if (game.turnsPlayed[key] > 1) {
-      $('.' + key + '-starts').removeClass('visible');
+      $(`.${key}-starts`).removeClass('visible');
     }
   }
 
   // update the board squares with wherever X/Blowfish have played.
-  for (var _key in game.boardStatus) {
-    if (game.boardStatus[_key] === "X") {
-      $('#' + _key + ' .x').addClass('visible');
+  for (let key in game.boardStatus) {
+    if (game.boardStatus[key] === "X") {
+      $(`#${key} .x`).addClass('visible');
     }
-    if (game.boardStatus[_key] === "Blowfish") {
-      $('#' + _key + ' .blowfish').addClass('visible');
+    if (game.boardStatus[key] === "Blowfish") {
+      $(`#${key} .blowfish`).addClass('visible');
     }
   }
 
   // if winningCombo[X/Blowfish/Draw] is true, make text appear at bottom saying X/Blowfish/Draw Wins (simple mode)
-  for (var _key2 in game.winningCombo) {
-    if (game.winningCombo[_key2] === true) {
-      $('.' + _key2 + '-wins').addClass('visible');
+  for (let key in game.winningCombo) {
+    if (game.winningCombo[key] === true) {
+      $(`.${key}-wins`).addClass('visible');
     }
   }
 
   // Puff up the blowfish if it wins.
   if (game.winningCombo["Blowfish"] === true) {
-    $('#' + game.winningSquare + '\n     .blowfish').addClass('makeBig');
+    $(`#${game.winningSquare}
+     .blowfish`).addClass('makeBig');
   }
 
   // Flash the three relevant Xs if X wins.
   if (game.winningCombo["X"] === true) {
-    $('#' + game.winningStrip[0] + ' .x').addClass('animated flash');
-    $('#' + game.winningStrip[1] + ' .x').addClass('animated flash');
-    $('#' + game.winningStrip[2] + ' .x').addClass('animated flash');
+    $(`#${game.winningStrip[0]} .x`).addClass('animated flash');
+    $(`#${game.winningStrip[1]} .x`).addClass('animated flash');
+    $(`#${game.winningStrip[2]} .x`).addClass('animated flash');
   }
 
   // Add the win to the relevant tally
-  for (var _key3 in game.winsTally) {
-    $('.' + _key3 + '-tally').html('' + game.winsTally[_key3]);
+  for (let key in game.winsTally) {
+    $(`.${key}-tally`).html(`${game.winsTally[key]}`);
   }
 };
