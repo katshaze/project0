@@ -1,10 +1,8 @@
-// Code for interaction with browser & DOM manipulation
-
-let twoPMode = true;
+// Two player version: code for interaction with browser
 
 $(document).ready(function() {
 
-  reset();
+  reset(); //possibly not necessary since game object is set in the reset position by default, but ensures board is reset and starting player will always be the same (X).
 
   // event listener for click to reset in endgame situation.
   $('body').on('click', function() {
@@ -22,26 +20,10 @@ $(document).ready(function() {
 
     //Endgame is false if we get to here so we keep going. //Event.stopPropagation() prevents the event from bubbling up the DOM tree, preventing any parent handlers from being notified of the event.
     event.stopPropagation();
+
     const square = $(this).attr("id"); //get the square name
-
-    if (twoPMode === false) {
-      if (game.currentPlayer === "Blowfish") {
-        game.playTurn(square, game.currentPlayer);
-        render();
-      }
-
-      if (game.endgame != true) {
-        if (game.currentPlayer === "X") {
-          setTimeout(function() {
-            game.playTurn(game.chooseSquareAI(), game.currentPlayer);
-            render();
-          }, 500);
-        }
-      }
-    } else if (twoPMode === true) {
-      game.playTurn(square, game.currentPlayer); //run the playTurn function
-      render(); //update the screen with the new state of play
-    }
+    game.playTurn(square, game.currentPlayer); //run the playTurn function
+    render(); //update the screen with the new state of play
   });
 
   //event listener for the reset button being clicked.
@@ -87,29 +69,10 @@ const reset = function() {
 
 //render for start of new game only - removes visible classes and notes the starting player
 const newGameRender = function() {
-  $('.current-mode').removeClass('current-mode');
   $('.visible').removeClass('visible');
   $('.makeBig').removeClass('makeBig');
   $('.flash').removeClass('animated flash');
-  if (twoPMode) {
-    $(`.${game.startingPlayer}-starts`).addClass('visible');
-    $('#two-p-tally').addClass('current-mode');
-  } else {
-    game.startingPlayer === "X" ? $(`.Computer-starts`).addClass('visible') :
-    $(`.${game.startingPlayer}-starts`).addClass('visible');
-    $('#ai-tally').addClass('current-mode');
-  }
-
-
-  if (twoPMode === false) {
-    //if it's start of a new game, board is reset and starting player is X (computer), play turn function is called for the computer.
-    if (game.currentPlayer === "X") {
-      setTimeout(function() {
-        game.playTurn(game.chooseSquareAI(), game.currentPlayer);
-        render();
-      }, 500);
-    }
-  }
+  $(`.${game.startingPlayer}-starts`).addClass('visible');
 };
 
 //render function - called within event listener for when player clicks a square. takes current state of play from game object and updates all relevant elements afresh
@@ -118,12 +81,7 @@ const render = function() {
   // remove the msg re who starts the game if more than one move has been made by any player
   for (let key in game.turnsPlayed) {
     if (game.turnsPlayed[key] > 1) {
-      if (twoPMode) {
-        $(`.${key}-starts`).removeClass('visible');
-      } else {
-        key === "X" ? $(`.Computer-starts`).removeClass('visible') :
-        $(`.${key}-starts`).removeClass('visible');
-      }
+      $(`.${key}-starts`).removeClass('visible');
     }
   }
 
@@ -140,12 +98,7 @@ const render = function() {
   // if winningCombo[X/Blowfish/Draw] is true, make text appear at bottom saying X/Blowfish/Draw Wins (simple mode)
   for (let key in game.winningCombo) {
     if (game.winningCombo[key] === true) {
-      if (twoPMode) {
-        $(`.${key}-wins`).addClass('visible');
-      } else {
-        key === "X" ? $(`.Computer-wins`).addClass('visible') :
-        $(`.${key}-wins`).addClass('visible');
-      }
+      $(`.${key}-wins`).addClass('visible');
     }
   }
 

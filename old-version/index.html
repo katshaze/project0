@@ -13,14 +13,13 @@
     <script type="text/javascript" src="js/jquery.js"></script>
     <script src="js/logic.js"></script>
     <script src="js/presentation.js"></script>
-    <script src="js/switching-mode.js"></script>
     <title>Noughts & Crosses</title>
   </head>
 
   <body>
     <div class="container">
       <header>
-        <h1>NOUGHTS & CROSSES: Xs vs. Blowfish</h1>
+        <h1>NOUGHTS & CROSSES: Two player</h1>
       </header>
 
       <main>
@@ -74,26 +73,18 @@
 
         <div class="result transparent">This is placeholder text set to transparent.
           <div class="X-wins">X WINS!</div>
-          <div class="Computer-wins">COMPUTER WINS!</div>
           <div class="Blowfish-wins">BLOWFISH WINS!</div>
           <div class="Draw-wins">IT'S A DRAW... PLAY AGAIN?</div>
           <div class="X-starts">Player X, you start this round</div>
-          <div class="Computer-starts">Computer (X) starts this round</div>
           <div class="Blowfish-starts">Player &#128033;, make the first move</div>
         </div>
 
-        <div id="two-p-tally" class="tally">
+
+        <div class="tally">
           <ul>
             <li>Wins Tally >></li>
             <li class="left-tally">Player &#128033;:  <span class="Blowfish-tally">0</span></li>
             <li class="right-tally">Player X:  <span class="X-tally">0</span></li>
-          </ul>
-        </div>
-        <div id="ai-tally" class="tally">
-          <ul>
-            <li>Wins Tally >></li>
-            <li class="left-tally">You &#128033;:  <span class="Blowfish-tally">0</span></li>
-            <li class="right-tally">Computer (X):  <span class="X-tally">0</span></li>
           </ul>
         </div>
       </main>
@@ -104,7 +95,7 @@
             <button id="reset">Reset</button>
           </li>
           <li>
-            <button id="switch-mode" class='switch-to-ai'><a id='mode'  href="#">Try human vs. computer</a></button>
+            <button class="switch-to-ai"><a href="https://katshaze.github.io/project0-AI">Try human vs. computer</a></button>
           </li>
         </ul>
       </footer>

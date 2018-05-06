@@ -1,10 +1,12 @@
 'use strict';
 
-// Two player version: code for interaction with browser
+// Code for interaction with browser & DOM manipulation
+
+var twoPMode = true;
 
 $(document).ready(function () {
 
-  reset(); //possibly not necessary since game object is set in the reset position by default, but ensures board is reset and starting player will always be the same (X).
+  reset();
 
   // event listener for click to reset in endgame situation.
   $('body').on('click', function () {
@@ -22,10 +24,26 @@ $(document).ready(function () {
 
     //Endgame is false if we get to here so we keep going. //Event.stopPropagation() prevents the event from bubbling up the DOM tree, preventing any parent handlers from being notified of the event.
     event.stopPropagation();
-
     var square = $(this).attr("id"); //get the square name
-    game.playTurn(square, game.currentPlayer); //run the playTurn function
-    render(); //update the screen with the new state of play
+
+    if (twoPMode === false) {
+      if (game.currentPlayer === "Blowfish") {
+        game.playTurn(square, game.currentPlayer);
+        render();
+      }
+
+      if (game.endgame != true) {
+        if (game.currentPlayer === "X") {
+          setTimeout(function () {
+            game.playTurn(game.chooseSquareAI(), game.currentPlayer);
+            render();
+          }, 500);
+        }
+      }
+    } else if (twoPMode === true) {
+      game.playTurn(square, game.currentPlayer); //run the playTurn function
+      render(); //update the screen with the new state of play
+    }
   });
 
   //event listener for the reset button being clicked.
@@ -71,10 +89,27 @@ var reset = function reset() {
 
 //render for start of new game only - removes visible classes and notes the starting player
 var newGameRender = function newGameRender() {
+  $('.current-mode').removeClass('current-mode');
   $('.visible').removeClass('visible');
   $('.makeBig').removeClass('makeBig');
   $('.flash').removeClass('animated flash');
-  $('.' + game.startingPlayer + '-starts').addClass('visible');
+  if (twoPMode) {
+    $('.' + game.startingPlayer + '-starts').addClass('visible');
+    $('#two-p-tally').addClass('current-mode');
+  } else {
+    game.startingPlayer === "X" ? $('.Computer-starts').addClass('visible') : $('.' + game.startingPlayer + '-starts').addClass('visible');
+    $('#ai-tally').addClass('current-mode');
+  }
+
+  if (twoPMode === false) {
+    //if it's start of a new game, board is reset and starting player is X (computer), play turn function is called for the computer.
+    if (game.currentPlayer === "X") {
+      setTimeout(function () {
+        game.playTurn(game.chooseSquareAI(), game.currentPlayer);
+        render();
+      }, 500);
+    }
+  }
 };
 
 //render function - called within event listener for when player clicks a square. takes current state of play from game object and updates all relevant elements afresh
@@ -83,7 +118,11 @@ var render = function render() {
   // remove the msg re who starts the game if more than one move has been made by any player
   for (var key in game.turnsPlayed) {
     if (game.turnsPlayed[key] > 1) {
-      $('.' + key + '-starts').removeClass('visible');
+      if (twoPMode) {
+        $('.' + key + '-starts').removeClass('visible');
+      } else {
+        key === "X" ? $('.Computer-starts').removeClass('visible') : $('.' + key + '-starts').removeClass('visible');
+      }
     }
   }
 
@@ -100,16 +139,20 @@ var render = function render() {
   // if winningCombo[X/Blowfish/Draw] is true, make text appear at bottom saying X/Blowfish/Draw Wins (simple mode)
   for (var _key2 in game.winningCombo) {
     if (game.winningCombo[_key2] === true) {
-      $('.' + _key2 + '-wins').addClass('visible');
+      if (twoPMode) {
+        $('.' + _key2 + '-wins').addClass('visible');
+      } else {
+        _key2 === "X" ? $('.Computer-wins').addClass('visible') : $('.' + _key2 + '-wins').addClass('visible');
+      }
     }
   }
 
-  // Puff up the blowfish if it wins.
+  // Blowfish puffs up for a win
   if (game.winningCombo["Blowfish"] === true) {
     $('#' + game.winningSquare + '\n     .blowfish').addClass('makeBig');
   }
 
-  // Flash the three relevant Xs if X wins.
+  // Flash the three relevant Xs if X wins
   if (game.winningCombo["X"] === true) {
     $('#' + game.winningStrip[0] + ' .x').addClass('animated flash');
     $('#' + game.winningStrip[1] + ' .x').addClass('animated flash');

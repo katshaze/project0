@@ -107,7 +107,7 @@ main {
   color: #13283d;
 }
 
-.x, .blowfish, .X-wins, .Blowfish-wins, .Draw-wins, .Blowfish-starts, .X-starts, .Computer-wins, .Computer-starts {
+.x, .blowfish, .X-wins, .Blowfish-wins, .Draw-wins, .Blowfish-starts, .X-starts {
   visibility: hidden;
 }
 
@@ -142,10 +142,6 @@ button {
   background-color: #de8208d6;
 }
 
-.switch-to-2p {
-  background-color: #009677;
-}
-
 .square:hover, button:hover {
   cursor: pointer;
 }
@@ -161,12 +157,4 @@ a {
 
 .transparent {
   color: #d8f4e4;
-}
-
-#two-p-tally, #ai-tally {
-  display: none;
-}
-
-.current-mode {
-  display: block !important;
 }

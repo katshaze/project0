@@ -2,9 +2,9 @@
 
 const game = {
 
-  startingPlayer: "Blowfish",
+  startingPlayer: "X",
 
-  currentPlayer: "Blowfish",
+  currentPlayer: "X",
 
   boardStatus: {
     1: "empty",
@@ -60,6 +60,19 @@ const game = {
       //update (alternate) current player
       this.updateCurrentPlayer(player);
     }
+  },
+
+  //function for AI mode: to randomly choose a square for the computer to play in based on what's available. gets called from presentation.js at same time as running the playturn function for the computer.
+  chooseSquareAI: function() {
+    let availableSquares = [];
+    for (let key in this.boardStatus) {
+      if (this.boardStatus[key] === "empty") {
+        availableSquares.push(key);
+      }
+    }
+    let chosenSquare = availableSquares[Math.floor(Math.random() * availableSquares.length)];
+    console.log(chosenSquare);
+    return chosenSquare;
   },
 
   //check for win function, called from playTurn function every time someone has a turn
