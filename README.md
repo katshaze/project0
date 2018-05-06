@@ -32,7 +32,6 @@ Simple online game of Noughts & Crosses, either two player or human vs. (not ver
 
 ## TODOs
 - [ ] Players to be able to choose their icons
-- [ ] Combine two player and AI version into single webpage
 - [ ] Maaaaaybe have a crack at creating an AI (hard) version for the human vs. computer mode
 - [ ] Expand to a 4x4 board for a 'Connect Four'-style game
 
