@@ -102,13 +102,13 @@ const render = function() {
     }
   }
 
-  // Puff up the blowfish if it wins.
+  // Blowfish puffs up for a win
   if (game.winningCombo["Blowfish"] === true) {
     $(`#${game.winningSquare}
      .blowfish`).addClass('makeBig');
   }
 
-  // Flash the three relevant Xs if X wins.
+  // Flash the three relevant Xs if X wins
   if (game.winningCombo["X"] === true) {
     $(`#${game.winningStrip[0]} .x`).addClass('animated flash');
     $(`#${game.winningStrip[1]} .x`).addClass('animated flash');

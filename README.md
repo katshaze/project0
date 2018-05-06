@@ -1,25 +1,27 @@
-# Project0 / Project0-AI
-Simple online game of Noughts & Crosses, either two player or human vs. computer (easy version).
+# Noughts & Crosses: Two Player & Human vs. (unskilled) computer
+Simple online game of Noughts & Crosses, either [two player](https://katshaze.github.io/project0) or [human vs. (not very skilled) computer](https://katshaze.github.io/project0-AI).
 
-This repository is for the two player version.
-
-Separate github repository for human vs. computer version is here: https://github.com/katshaze/project0-AI
+![Noughts&Crosses Screenshot](https://katshaze.github.io/project-0/assets/noughts&crosses.png)
 
 ## Get it running:
-* Open in your browser using: https://katshaze.github.io/project0
-* The page has a link to the AI (Easy) version, but if you're specifically looking for the AI version, it's here: https://katshaze.github.io/project0-AI
-* (Tested browsers so far include Chrome, Firefox & Safari)
+* Simply open it in your browser
+* [Two player](https://katshaze.github.io/project0)
+* [Human vs. computer](https://katshaze.github.io/project0-AI)
+* Tested browsers so far include Chrome, Firefox & Safari
 
-## Built with:
-* JavaScript (& jQuery)
+## Technologies used:
+* JavaScript
+* jQuery
 * HTML & CSS
+* Animate.css
+* Babel (for transpiling)
 
 ## Game features include:
 * Alternating starting player
-* Winner of each game displayed on screen (inc. special effects)
+* Winner of each game displayed on screen (inc. with animations)
 * Wins tallied (until a screen refresh)
 * Reset button plus click anywhere reset function each time a game ends
-* Play against the computer (easy) version (the two versions are separate web pages with a button linking them)
+* Choice of playing two player or against the computer (easy) (the two versions are separate web pages with a button linking them)
 
 ## Extra snazzy bits
 * Blowfish puffs up for a win.
@@ -39,8 +41,7 @@ Separate github repository for human vs. computer version is here: https://githu
 - [ ] Expand to a 4x4 board for a 'Connect Four'-style game
 
 ## Licensing
-
-Dual licensed under the MIT and GPL licenses.
+Licensed under MIT.
 
 ## Thanks to
 
