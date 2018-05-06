@@ -1,10 +1,10 @@
-# Noughts & Crosses: Xs vs. Blowfish &#128033;
-Simple online game of Noughts & Crosses, either [two player](https://katshaze.github.io/project0) or [human vs. (not very skilled) computer](https://katshaze.github.io/project0-AI).
+# Noughts & Crosses: Two player & human vs. computer
+Simple online game of Noughts & Crosses, either two player or human vs. (not very skilled) computer.
 
 ![Noughts&Crosses Screenshot](assets/noughts&crosses.png)
 
 ## Get it running:
-* Simply open it in your browser: [Two player](https://katshaze.github.io/project0) / [Human vs. computer](https://katshaze.github.io/project0-AI)
+* Simply open it in your browser! Check it out [here](https://katshaze.github.io/project0)
 * Tested browsers so far include Chrome, Firefox & Safari
 
 ## Technologies used:
@@ -20,7 +20,7 @@ Simple online game of Noughts & Crosses, either [two player](https://katshaze.gi
 * Winner of each game displayed on screen (inc. with animations)
 * Wins tallied (until a screen refresh)
 * Reset button plus click anywhere reset function each time a game ends
-* Choice of playing two player or against the computer (easy) (the two versions are separate web pages with a button linking them)
+* Choice of playing two player or against the (unskilled) computer
 
 ## Problematic bits
 * Winning combinations are a bit hardcoded; not very efficient for scaling into a larger board.
