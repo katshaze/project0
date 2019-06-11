@@ -4,7 +4,7 @@
   "description": "Simple online game of Noughts & Crosses, either two player or human vs. computer (easy version).",
   "main": "index.js",
   "scripts": {
-    "build": "babel src -d js" ,
+    "build": "babel src -d js",
     "watch": "babel --watch src -d js"
   },
   "repository": {
